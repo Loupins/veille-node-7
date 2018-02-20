@@ -53,12 +53,30 @@ app.post('/ajouter', (req, res) => {
 			telephone:req.body.telephone
 		}
 		db.collection('adresse').save(objet, (err, result) => {
-		if (err) return console.log(err)
-		console.log('sauvegarder dans la BD')
-		res.redirect('/adresses')
-	})
+			if (err) return console.log(err)
+			console.log('sauvegarder dans la BD')
+			res.redirect('/adresses')
+		})
 	}
 	
+})
+
+app.get('/peupler', (req, res) => {
+	let tableauPersonne = peupler();
+	for(var i=0;i<20;i++) {
+		let tableau = tableauPersonne[i];
+		let objet = {
+			nom:tableau[0],
+			prenom:tableau[1],
+			courriel:tableau[2],
+			telephone:tableau[3]
+		}
+		db.collection('adresse').save(objet, (err, result) => {
+			if (err) return console.log(err)
+			console.log('sauvegarder dans la BD')
+		})
+	}
+	res.redirect('/adresses');
 })
 
 app.get('/detruire/:id', (req, res) => {
@@ -78,35 +96,6 @@ app.get('/trier/:cle/:ordre', (req, res) => {
 		res.render('composants/adresses.ejs', {adresses: resultat, cle, ordre })
 	})
 });
-
-// app.post('/modifier', (req, res) => {
-// 	console.log('req.body' + req.body)
-// 	if (req.body['_id'] != )
-// 	{ 
-// 		console.log('sauvegarde') 
-// 		var oModif = {
-// 			"_id": ObjectID(req.body['_id']), 
-// 			nom: req.body.nom,
-// 			prenom:req.body.prenom, 
-// 			courriel:req.body.courriel, 
-// 			telephone:req.body.telephone
-// 		}
-// 		var util = require("util");
-// 		console.log('util = ' + util.inspect(oModif));
-// 	}
-// 	else
-// 	{
-// 		console.log('insert')
-// 		console.log(req.body)
-// 		var oModif = {
-// 			nom: req.body.nom,
-// 			prenom:req.body.prenom, 
-// 			courriel:req.body.courriel, 
-// 			telephone:req.body.telephone
-// 		}
-// 	}
-// })
-
 
 let db // variable qui contiendra le lien sur la BD
 

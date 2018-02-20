@@ -5,10 +5,11 @@ console.log('max = ' + max);
 const peupler_json = () => {
 	let position;
 	let tabPersonne = [];
-	for (let k=0;k<10;k++) {
+	for (let k=0;k<20;k++) {
 		let position = Math.floor(Math.random()*max);
 		tabPersonne.push(tableau[position]);
 	}
+	console.log("tableau personne : " + tabPersonne);
 	return(tabPersonne);
 }
 
