@@ -25,5 +25,4 @@ const peupler_json = () => {
 	console.log("tableau personne : " + tabToutesLesPersonnes);
 	return(tabToutesLesPersonnes);
 }
-
 module.exports = peupler_json;
